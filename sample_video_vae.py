@@ -149,7 +149,7 @@ def main():
 
         except Exception as e:
             print(f"Error processing {image_file}: {e}")
-        break
+        
     # Add these after the processing loop
     if successful_images > 0:
         average_psnr = sum(psnr_values) / successful_images
