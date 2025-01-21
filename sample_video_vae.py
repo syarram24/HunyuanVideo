@@ -41,7 +41,7 @@ def main():
     hunyuan_video_sampler = HunyuanVideoSampler.from_pretrained(models_root_path, args=args)
     
     print(hunyuan_video_sampler.vae.config)
-    vae = hunyuan_video_sampler.vae
+    vae = hunyuan_video_sampler.vae.float().to(device)
     
     # Get the updated args
     args = hunyuan_video_sampler.args
