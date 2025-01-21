@@ -64,7 +64,8 @@ def main():
             # Load image
             image_path = os.path.join(dataset_path, image_file)
             image = Image.open(image_path).convert("RGB")
-            original_image = transform(image).unsqueeze(0).to(device)
+            original_image = transform(image).unsqueeze(0).to(device)[:, :, None, :, :]
+            print(f'original_image {original_image.shape}')
 
             # VAE reconstruction
             vae.eval()
@@ -75,6 +76,7 @@ def main():
                 print(f'latent {latent.shape}')
                 latent_scaled = latent #* 0.18215
                 reconstructed_image = vae.decode(latent_scaled, return_dict=False)[0]
+                reconstructed_image = reconstructed_image[:, :, 0, :, :]
 
                 print(f'reconstructed_image min {reconstructed_image.min()} max {reconstructed_image.max()}')
                 
