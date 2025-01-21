@@ -82,7 +82,7 @@ def main():
                 
                 # Compute PSNR using torchvision
                 torchmetrics_psnr = tm_F.peak_signal_noise_ratio(
-                    (original_image), 
+                    (original_image[:, :, 0, :, :]), 
                     (reconstructed_image + 1.0)/2.0,
                     data_range=1.0
                 )
