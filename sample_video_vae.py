@@ -26,7 +26,7 @@ def main():
         raise ValueError(f"`models_root` not exists: {models_root_path}")
     
     dataset_path = "/mnt/localssd/ffhq-dataset/images1024x1024/00000"
-    output_path = "/mnt/localssd/psnr_heatmaps/Flux_ffhq_images_256"
+    output_path = "/mnt/localssd/psnr_heatmaps/Hunyuan_ffhq_images_256"
     os.makedirs(output_path, exist_ok=True)
 
     # Load VAE model
