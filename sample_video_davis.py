@@ -48,7 +48,8 @@ def main():
 
 
     transform = transforms.Compose([
-        transforms.Resize((480, 270)),  # Resize for VAE model compatibility
+        transforms.CenterCrop((1024, 512)),  # Center crop to 1024x512 before resizing
+        #transforms.Resize((960, 540)),  # Resize for VAE model compatibility
         transforms.ToTensor(),  # Convert to tensor
     ])
 
