@@ -69,7 +69,7 @@ def main():
             # Load image
             # Get all images from current folder
             folder_path = os.path.join(dataset_path, folder)
-            image_files = sorted([f for f in os.listdir(folder_path) if f.endswith(('.jpg', '.jpeg', '.png'))])[:48]
+            image_files = sorted([f for f in os.listdir(folder_path) if f.endswith(('.jpg', '.jpeg', '.png'))])[:45]
             
             # Create list to store frames
             frames = []
