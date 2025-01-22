@@ -82,7 +82,7 @@ def main():
                 image = Image.open(image_path).convert("RGB")
                 print(f'image shape: {image.size}')
                 frame = transform(image)
-            
+                print(f'frame shape: {frame.shape}')
                 frames.append(frame)
             
             # Stack frames into video tensor [1, 3, T, H, W]
