@@ -69,7 +69,7 @@ def main():
             # Load image
             # Get all images from current folder
             folder_path = os.path.join(dataset_path, folder)
-            image_files = sorted([f for f in os.listdir(folder_path) if f.endswith(('.jpg', '.jpeg', '.png'))])[:50]
+            image_files = sorted([f for f in os.listdir(folder_path) if f.endswith(('.jpg', '.jpeg', '.png'))])[:48]
             
             # Create list to store frames
             frames = []
@@ -78,8 +78,9 @@ def main():
             for image_file in image_files:
                 image_path = os.path.join(folder_path, image_file)
                 image = Image.open(image_path).convert("RGB")
+                print(f'image shape: {image.size}')
                 frame = transform(image)
-                print(f'frame shape: {frame.shape}')
+            
                 frames.append(frame)
             
             # Stack frames into video tensor [1, 3, T, H, W]
@@ -97,7 +98,7 @@ def main():
                 latent_scaled = latent #* 0.18215
                 reconstructed_video = vae.decode(latent_scaled, return_dict=False)[0]
 
-                print(f'reconstructed_image min {reconstructed_video.min()} max {reconstructed_video.max()}')
+                print(f'reconstructed_video {reconstructed_video.shape} min {reconstructed_video.min()} max {reconstructed_video.max()}')
                 
                 # Compute PSNR using torchvision
                 torchmetrics_psnr = tm_F.peak_signal_noise_ratio(
