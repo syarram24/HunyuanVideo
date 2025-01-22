@@ -67,7 +67,7 @@ def main():
     successful_videos = 0
 
     for idx, folder in enumerate(folders[:20]):
-        try:
+        if True:
             # Load image
             # Get all images from current folder
             folder_path = os.path.join(dataset_path, folder)
@@ -185,8 +185,8 @@ def main():
             print(f"Processed {idx + 1}/{len(folders)}: {folder} and saved combined image")
 
 
-        except Exception as e:
-            print(f"Error processing {folder}: {e}")
+        # except Exception as e:
+        #     print(f"Error processing {folder}: {e}")
         
     # Add these after the processing loop
     if successful_videos > 0:
