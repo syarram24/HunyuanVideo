@@ -64,7 +64,7 @@ def main():
     psnr_values = []
     successful_videos = 0
 
-    for idx, folder in enumerate(folders[:2]):
+    for idx, folder in enumerate(folders[:20]):
         try:
             # Load image
             # Get all images from current folder
