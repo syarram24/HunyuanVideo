@@ -25,8 +25,8 @@ def main():
     if not models_root_path.exists():
         raise ValueError(f"`models_root` not exists: {models_root_path}")
     
-    dataset_path = "/mnt/localssd/DAVIS/JPEGImages/Full-Resolution"
-    output_path = "/mnt/localssd/psnr_heatmaps/Hunyuan_davis_video_256"
+    dataset_path = "/mnt/localssd/DAVIS/JPEGImages/1080p" #Full-Resolution
+    output_path = "/mnt/localssd/psnr_heatmaps/Hunyuan_davis_video_1080p"
     os.makedirs(output_path, exist_ok=True)
 
     # Load VAE model
@@ -48,8 +48,8 @@ def main():
 
 
     transform = transforms.Compose([
-        transforms.Resize((960, 540)),
-        transforms.CenterCrop((960, 512)),  # Center crop to 1024x512 before resizing
+        #transforms.Resize((960, 540)),
+        #transforms.CenterCrop((960, 512)),  # Center crop to 1024x512 before resizing
         #transforms.Resize((960, 540)),  # Resize for VAE model compatibility
         transforms.ToTensor(),  # Convert to tensor
     ])
@@ -94,7 +94,7 @@ def main():
             vae.eval()
             with torch.no_grad():
                 #latent = vae.encode(original_image).latent_dist.sample()
-                print(f'original_image min {original_video.min()} max {original_video.max()}')
+                print(f'original_image {original_image.shape} min {original_video.min()} max {original_video.max()}')
                 latent = vae.encode(original_video*2.0 - 1.0).latent_dist.sample()
                 print(f'latent {latent.shape}')
                 latent_scaled = latent #* 0.18215
