@@ -91,18 +91,13 @@ def main():
             original_video = original_video.to(device)
             print(f'original_video shape: {original_video.shape}')
 
-            if vae.dtype == torch.float16:
-                original_video = original_video.to(torch.float32)
-            elif vae.dtype == torch.float32:
-                original_video = original_video.to(torch.float16)
-            else:
-                raise ValueError(f'Unsupported dtype: {vae.dtype}')
+            # Convert input to float16 to match VAE dtype
+            original_video = original_video.half()
 
             # VAE reconstruction
             vae.eval()
             with torch.no_grad():
-                #latent = vae.encode(original_image).latent_dist.sample()
-                print(f'original_image {original_video.shape} min {original_video.min()} max {original_video.max()}')
+                print(f'original_video {original_video.shape} min {original_video.min()} max {original_video.max()}')
                 latent = vae.encode(original_video*2.0 - 1.0).latent_dist.sample()
                 print(f'latent {latent.shape}')
                 latent_scaled = latent #* 0.18215
