@@ -131,7 +131,7 @@ def main():
                 mse = np.mean((original_image_np - reconstructed_image_np) ** 2, axis=2)
 
                 # Compute pixel-wise PSNR (avoid log(0) with epsilon)
-                epsilon = 1e-10
+                epsilon = 1e-6
                 psnr_heatmap = 10 * np.log10(1.0 / (mse + epsilon))
                 
                 print(f'psnr_heatmap {psnr_heatmap.mean()}')
