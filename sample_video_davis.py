@@ -25,7 +25,7 @@ def main():
     if not models_root_path.exists():
         raise ValueError(f"`models_root` not exists: {models_root_path}")
     
-    dataset_path = "/mnt/localssd/DAVIS/JPEGImages/1080p" #Full-Resolution
+    dataset_path = "/mnt/localssd/DAVIS/JPEGImages/Full-Resolution" #Full-Resolution
     output_path = "/mnt/localssd/psnr_heatmaps/Hunyuan_davis_video_1080p"
     os.makedirs(output_path, exist_ok=True)
 
