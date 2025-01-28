@@ -94,7 +94,7 @@ def main():
             vae.eval()
             with torch.no_grad():
                 #latent = vae.encode(original_image).latent_dist.sample()
-                print(f'original_image {original_image.shape} min {original_video.min()} max {original_video.max()}')
+                print(f'original_image {original_video.shape} min {original_video.min()} max {original_video.max()}')
                 latent = vae.encode(original_video*2.0 - 1.0).latent_dist.sample()
                 print(f'latent {latent.shape}')
                 latent_scaled = latent #* 0.18215
