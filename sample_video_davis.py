@@ -41,7 +41,8 @@ def main():
     hunyuan_video_sampler = HunyuanVideoSampler.from_pretrained(models_root_path, args=args)
     
     print(hunyuan_video_sampler.vae.config)
-    vae = hunyuan_video_sampler.vae.float()
+    vae = hunyuan_video_sampler.vae #.float()
+    print(vae.dtype)
     
     # Get the updated args
     args = hunyuan_video_sampler.args
@@ -89,6 +90,13 @@ def main():
             original_video = torch.stack(frames, dim=1).unsqueeze(0)
             original_video = original_video.to(device)
             print(f'original_video shape: {original_video.shape}')
+
+            if vae.dtype == torch.float16:
+                original_video = original_video.to(torch.float32)
+            elif vae.dtype == torch.float32:
+                original_video = original_video.to(torch.float16)
+            else:
+                raise ValueError(f'Unsupported dtype: {vae.dtype}')
 
             # VAE reconstruction
             vae.eval()
