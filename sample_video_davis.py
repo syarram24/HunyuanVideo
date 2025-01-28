@@ -122,9 +122,9 @@ def main():
             for frame_id in range(original_video.shape[2]):
                 original_image = original_video[:, :, frame_id, :, :]
                 reconstructed_image = reconstructed_video[:, :, frame_id, :, :]
-                original_image_np = original_image.squeeze().cpu().numpy().transpose(1, 2, 0)
+                original_image_np = original_image.float().squeeze().cpu().numpy().transpose(1, 2, 0)
                 original_image_np = np.clip(original_image_np, 0, 1)
-                reconstructed_image_np = ((reconstructed_image + 1.0)/2.0).squeeze().cpu().numpy().transpose(1, 2, 0)
+                reconstructed_image_np = ((reconstructed_image.float() + 1.0)/2.0).squeeze().cpu().numpy().transpose(1, 2, 0)
                 reconstructed_image_np = np.clip(reconstructed_image_np, 0, 1)
 
                 # Compute pixel-wise MSE
